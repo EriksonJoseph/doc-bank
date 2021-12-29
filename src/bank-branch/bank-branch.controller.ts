@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { BankBranchEntity } from 'src/entity/bankBranch-.entity';
 import { ObjectID } from 'typeorm';
 import { BankBranchService } from './bank-branch.service';
@@ -18,6 +18,15 @@ export class BankBranchController {
     getBankBranchs(){
         return this.bankBranchservice.getBankBranchs()
         // return 'This is getBankBranch action'
+    }
+    
+    @Get('condition')
+    getBankBranchByCondition(
+        @Query('limmit') limit:number,
+        @Query('skip') skip:number,
+        @Query('order') order:string, // only DESC or ASC
+        ){
+        this.bankBranchservice.getBankBranchByCodition(limit,skip,order)
     }
 
     @Get(':id')
@@ -40,6 +49,9 @@ export class BankBranchController {
             'cratedBy','changeBy','changeDate'
         ] // list of allowed keys
         const isValid = updates.every((update)=>allowedUpdate.includes(update))//if all of input keys are include in allowed list would return true
+        const updateDate = new Date();
+        console.log(updateDate)
+        bankBranch.changeDate = updateDate // update date timestamp
         if(!isValid){
             return 'Invalid input field'
         }else{

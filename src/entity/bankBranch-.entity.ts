@@ -32,7 +32,7 @@ export class BankBranchEntity{
     @Column()
     createdBy:string;
 
-    @Column()
+    @Column({type:'timestamp',default: () => 'CURRENT_TIMESTAMP'})
     createdDate:Date;
 
     @Column({default:null})

@@ -12,7 +12,12 @@ import { ParameterService } from './parameter/parameter.service';
 import { PaymentChannelController } from './payment-channel/payment-channel.controller';
 import { PaymentChannelService } from './payment-channel/payment-channel.service';
 import { PaymentChannelModule } from './payment-channel/payment-channel.module';
-
+import { UserAuthorizationReversalModule } from './user-authorization-reversal/user-authorization-reversal.module';
+import { UserAuthorizationReversalService } from './user-authorization-reversal/user-authorization-reversal.service';
+import { UserAuthorizationReversalController } from './user-authorization-reversal/user-authorization-reversal.controller';
+import { UserGroupModule } from './user-group/user-group.module';
+import { UserGroupController } from './user-group/user-group.controller';
+import { UserGroupService } from './user-group/user-group.service';
 @Module({
   imports: [
     BankBranchModule,
@@ -29,8 +34,10 @@ import { PaymentChannelModule } from './payment-channel/payment-channel.module';
     }),
     ParameterModule,
     PaymentChannelModule,
+    UserAuthorizationReversalModule,
+    UserGroupModule,
   ],
-  controllers: [AppController, BankBranchController, ParameterController, PaymentChannelController],
-  providers: [AppService, BankBranchService, ParameterService, PaymentChannelService],
+  controllers: [AppController, BankBranchController, ParameterController, PaymentChannelController, UserAuthorizationReversalController, UserGroupController],
+  providers: [AppService, BankBranchService, ParameterService, PaymentChannelService, UserAuthorizationReversalService, UserGroupService],
 })
 export class AppModule {}

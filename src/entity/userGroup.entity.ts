@@ -1,28 +1,28 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('user_group')
-export class UserGroup{
+export class UserGroupEntity{
     @PrimaryGeneratedColumn()
     userGroupId:number
 
     @Column()
     userGroupName:string;
 
-    @Column()
+    @Column({default:null})
     effectiveDate:Date;
 
-    @Column()
+    @Column({default:null})
     expiryDate:Date;
 
     @Column()
     createdBy:string;
 
-    @Column()
+    @Column({type:'timestamp',default: () => 'CURRENT_TIMESTAMP'})
     createdDate:Date;
 
     @Column()
     changeBy:string;
 
-    @Column()
+    @Column({type:'timestamp',default: () => 'CURRENT_TIMESTAMP'})
     changeDate:Date;
 }

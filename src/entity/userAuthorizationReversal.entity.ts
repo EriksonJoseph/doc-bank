@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('user_authorication_reversal')
-export class UserAuthorizationReversal{
+export class UserAuthorizationReversalEntity{
     @PrimaryGeneratedColumn()
     userCode:number
 
@@ -9,7 +9,7 @@ export class UserAuthorizationReversal{
     userName:string;
 
     @Column()
-    effecTime:Date;
+    effectTime:Date;
 
     @Column()
     expiryTime:Date;
@@ -20,18 +20,18 @@ export class UserAuthorizationReversal{
     @Column()
     userGroup:string;
 
-    @Column()
+    @Column({default:''})
     createdBy:string;
-
-    @Column()
+ 
+    @Column({type:'timestamp',default: () => 'CURRENT_TIMESTAMP'})
     createdDate:Date;
 
-    @Column()
+    @Column({default:null})
     changeBy:string;
 
-    @Column()
+    @Column({type:'timestamp',default: () => 'CURRENT_TIMESTAMP'})
     changeDate:Date;
 
-    @Column()
-    assignUserRole:Array<string>;
+    @Column({default:null})
+    assignUserRole:string;
 }

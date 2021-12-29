@@ -18,11 +18,32 @@ export class BankBranchService {
     }
 
     getBankBranchs():Observable<BankBranchEntity[]>{
-        return from(this.bankBranch.find());
+        const painationLim = 2
+        const skip = 0
+
+        return from(this.bankBranch.find({
+            where:{
+                bankNameEng:'siam comercial bank'
+            },
+            take:painationLim,
+            skip: skip,
+            order: { bankId:'ASC' }
+        }));
     }
 
     getOneBankBrach(id:ObjectID):Observable<BankBranchEntity>{
         return from(this.bankBranch.findOne(id));
+    }
+
+    getBankBranchByCodition(limit:number,skip:number,order:string):Observable<BankBranchEntity[]>{
+        return from(this.bankBranch.find({
+            where:{
+                bankNameEng:'siam comercial bank'
+            },
+            take:limit,
+            skip: skip,
+            order: { bankId:'ASC' }
+        }));
     }
 
     putBankBranch(id:ObjectID, bankInfo:BankBranchEntity, updates?:Array<string>):Observable<UpdateResult>{    
