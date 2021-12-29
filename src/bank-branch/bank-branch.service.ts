@@ -22,27 +22,29 @@ export class BankBranchService {
         const skip = 0
 
         return from(this.bankBranch.find({
-            where:{
-                bankNameEng:'siam comercial bank'
-            },
-            take:painationLim,
-            skip: skip,
-            order: { bankId:'ASC' }
-        }));
+            order: { 
+                bankId:'ASC'
+            }
+        }))
     }
 
     getOneBankBrach(id:ObjectID):Observable<BankBranchEntity>{
         return from(this.bankBranch.findOne(id));
     }
 
-    getBankBranchByCodition(limit:number,skip:number,order:string):Observable<BankBranchEntity[]>{
+    getBankBranchByCodition(limit:number,skip:number,sort:string,bankCode:string,bankNameEng:string,bankNameThai:string):Observable<BankBranchEntity[]>{
+        const _sort=(sort.toUpperCase()==='desc')?'DESC':'ASC'
         return from(this.bankBranch.find({
             where:{
-                bankNameEng:'siam comercial bank'
+                bankCode:bankCode,
+                bankNameEng:bankNameEng,
+                bankNameThai:bankNameThai,
             },
             take:limit,
             skip: skip,
-            order: { bankId:'ASC' }
+            order: { 
+                bankId: _sort
+            }
         }));
     }
 

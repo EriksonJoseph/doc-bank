@@ -22,11 +22,14 @@ export class BankBranchController {
     
     @Get('condition')
     getBankBranchByCondition(
-        @Query('limmit') limit:number,
+        @Query('limit') limit:number,
         @Query('skip') skip:number,
-        @Query('order') order:string, // only DESC or ASC
+        @Query('sort') sort:string,
+        @Query('bank_code') bankCode:string,
+        @Query('bank_name_eng') bankNameEng:string,
+        @Query('bank_name_thai') bankNameThai:string
         ){
-        this.bankBranchservice.getBankBranchByCodition(limit,skip,order)
+            return this.bankBranchservice.getBankBranchByCodition(limit,skip,sort,bankCode,bankNameEng,bankNameThai)
     }
 
     @Get(':id')
